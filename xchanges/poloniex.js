@@ -4,7 +4,7 @@
 
 const returnTicker = 'https://poloniex.com/public?command=returnTicker'; // we need BTC_ETH, BTC_LTC, BTC_DASH
 
-module.exports = {    
+module.exports = {
     sendRequest: function(request, reqTimeInUtc, ExchangeRecord){
         // console.warn('DateTime ', reqTimeInUtc);
         request(returnTicker, function (error, response, body) {
@@ -17,15 +17,18 @@ module.exports = {
                 let responseValues = [{
                     currency: 'BTC-ETH',
                     highBid: ETH.last,
-                    lowAsk: ETH.lowestAsk
+                    lowAsk: ETH.lowestAsk,
+                    buy: ETH.lowestAsk
                 },{
                     currency: 'BTC-DSH',
                     highBid: DASH.last,
-                    lowAsk: DASH.lowestAsk
+                    lowAsk: DASH.lowestAsk,
+                    buy: DASH.lowestAsk
                 },{
                     currency: 'BTC-LTC',
                     highBid: LTC.last,
-                    lowAsk: LTC.lowestAsk
+                    lowAsk: LTC.lowestAsk,
+                    buy: LTC.lowestAsk
                 }]
                 let dataRecord = new ExchangeRecord({ exchange: 'polo', values: responseValues, timeRecorded: reqTimeInUtc })
                 dataRecord.save(function (err) {

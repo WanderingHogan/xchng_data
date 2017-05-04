@@ -20,7 +20,7 @@ setInterval(function() {
     btcE.sendRequest(request, utcDateTime, ExchangeRecord); // uses async/await because route for each currency
     polo.sendRequest(request, utcDateTime, ExchangeRecord);
     bttx.sendRequest(request, utcDateTime, ExchangeRecord);
-// }, (environment.pollFrequencyInSeconds * 1000)); // 30 second intervals, 
-}, 2000); // for testing, 2 second intervals
+}, (environment.pollFrequencyInSeconds * 1000)); // 30 second intervals, 
+// }, 2000); // for testing, 2 second intervals
 
 console.log('running the database populator microservice...')
