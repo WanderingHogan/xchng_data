@@ -35,7 +35,6 @@ module.exports = {
                     volume: BTC_LTC.v[1]
                 }]
                 let dataRecord = new ExchangeRecord({ exchange: 'kraken', values: responseValues, timeRecorded: reqTimeInUtc })
-                console.log(dataRecord)
                 dataRecord.save(function (err) {
                     if (err) return handleError(err);
                 })

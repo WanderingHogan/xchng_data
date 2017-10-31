@@ -2,7 +2,10 @@
 
 // TODO: remove this from polling and use suggested autobahn
 
-const returnTicker = 'https://poloniex.com/public?command=returnTicker'; // we need BTC_ETH, BTC_LTC, BTC_DASH
+const returnTicker = 'https://poloniex.com/public?command=returnTicker'; // we need BTC_ETH, BTC_LTC, BTC_DOGE
+// baseVolume is volume in first currency pair
+// quoteVolume is volume in the 2nd currency pair
+// both appear to be 24 hour volumes based on coinmarketcap comparisons
 
 module.exports = {
     sendRequest: function(request, reqTimeInUtc, ExchangeRecord){
@@ -12,23 +15,26 @@ module.exports = {
                 let info = JSON.parse(body)
                 const ETH = info['BTC_ETH'],
                       LTC = info['BTC_LTC'],
-                      DASH = info['BTC_DASH'];
+                      DOGE = info['BTC_DOGE'];
 
                 let responseValues = [{
                     currency: 'BTC-ETH',
-                    highBid: ETH.last,
-                    lowAsk: ETH.lowestAsk,
-                    buy: ETH.lowestAsk
+                    high: ETH.high24hr,
+                    low: ETH.low24hr,
+                    last: ETH.last,
+                    volume: ETH.baseVolume // IN BTC
                 },{
-                    currency: 'BTC-DSH',
-                    highBid: DASH.last,
-                    lowAsk: DASH.lowestAsk,
-                    buy: DASH.lowestAsk
+                    currency: 'BTC-DOGE',
+                    high: DOGE.high24hr,
+                    low: DOGE.low24hr,
+                    last: DOGE.last, 
+                    volume: DOGE.baseVolume
                 },{
                     currency: 'BTC-LTC',
-                    highBid: LTC.last,
-                    lowAsk: LTC.lowestAsk,
-                    buy: LTC.lowestAsk
+                    high: LTC.high24hr,
+                    low: LTC.low24hr,
+                    last: LTC.last, 
+                    volume: LTC.baseVolume
                 }]
                 let dataRecord = new ExchangeRecord({ exchange: 'polo', values: responseValues, timeRecorded: reqTimeInUtc })
                 dataRecord.save(function (err) {
