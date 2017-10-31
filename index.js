@@ -20,9 +20,9 @@ const kraken = require('./xchanges/kraken.js'),
 // load exchanges
 setInterval(function() {
     let utcDateTime = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
-    // kraken.sendRequest(request, utcDateTime, ExchangeRecord); // uses async/await because route for each currency
+    kraken.sendRequest(request, utcDateTime, ExchangeRecord); // uses async/await because route for each currency
     // polo.sendRequest(request, utcDateTime, ExchangeRecord);
-    bttx.sendRequest(request, utcDateTime, ExchangeRecord);
+    // bttx.sendRequest(request, utcDateTime, ExchangeRecord);
 }, (environment.pollFrequencyInSeconds * 1000));
 
 console.log('running the database populator microservice...')

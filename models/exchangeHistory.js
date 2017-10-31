@@ -9,6 +9,7 @@ module.exports = function(mongoose) {
             currency : String,
             high     : Number,
             low      : Number,
+            last     : Number,
             volume   : Number
         }],
         timeRecorded: Date
