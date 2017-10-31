@@ -6,10 +6,10 @@ module.exports = function(mongoose) {
         uid         : ObjectId,
         exchange    : String,
         values      : [{
-            currency    : String,
-            highBid     : Number,
-            lowAsk      : Number,
-            buy         : Number
+            currency : String,
+            high     : Number,
+            low      : Number,
+            volume   : Number
         }],
         timeRecorded: Date
     });
